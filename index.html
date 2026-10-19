@@ -34,15 +34,31 @@
   var CAUGHT = "hala huli ka, chuchupain ka ni rafa";
   var DEFAULT_TITLE = document.title;
   var msg = document.getElementById("msg");
+  var away = false;
+
+  function markAway() {
+    if (away) return;
+    away = true;
+    document.title = CAUGHT;
+  }
+
+  function markBack() {
+    if (!away) return;
+    if (document.hidden || !document.hasFocus()) return;
+    away = false;
+    document.title = DEFAULT_TITLE;
+    msg.classList.add("show");
+  }
 
   document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-      document.title = CAUGHT;
-    } else {
-      document.title = DEFAULT_TITLE;
-      msg.classList.add("show");
-    }
+    if (document.hidden) markAway();
+    else markBack();
   });
+
+  window.addEventListener("blur", markAway);
+  window.addEventListener("focus", markBack);
+  window.addEventListener("pagehide", markAway);
+  window.addEventListener("pageshow", markBack);
 </script>
 </body>
 </html>
