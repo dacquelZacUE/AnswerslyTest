@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #fff;
+  }
+  #msg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    font-family: system-ui, sans-serif;
+    font-size: 8vw;
+    font-weight: 700;
+    color: #d00000;
+  }
+  #msg.show {
+    display: flex;
+  }
+</style>
+</head>
+<body>
+<div id="msg">hala huli ka, chuchupain ka ni rafa</div>
+<script>
+  var CAUGHT = "hala huli ka, chuchupain ka ni rafa";
+  var DEFAULT_TITLE = document.title;
+  var msg = document.getElementById("msg");
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      document.title = CAUGHT;
+    } else {
+      document.title = DEFAULT_TITLE;
+      msg.classList.add("show");
+    }
+  });
+</script>
+</body>
+</html>
