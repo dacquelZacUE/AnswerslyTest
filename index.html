@@ -26,14 +26,31 @@
   #msg.show {
     display: flex;
   }
+  #hint {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    font-family: system-ui, sans-serif;
+    font-size: 4vw;
+    color: #999;
+  }
+  #hint.hide {
+    display: none;
+  }
 </style>
 </head>
 <body>
+<div id="hint">leave tab to test</div>
 <div id="msg">hala huli ka, chuchupain ka ni rafa</div>
 <script>
   var CAUGHT = "hala huli ka, chuchupain ka ni rafa";
   var DEFAULT_TITLE = document.title;
   var msg = document.getElementById("msg");
+  var hint = document.getElementById("hint");
   var away = false;
 
   function markAway() {
@@ -47,6 +64,7 @@
     if (document.hidden || !document.hasFocus()) return;
     away = false;
     document.title = DEFAULT_TITLE;
+    hint.classList.add("hide");
     msg.classList.add("show");
   }
 
